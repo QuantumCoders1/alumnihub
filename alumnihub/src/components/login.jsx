@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ import useNavigate
 import "./login.css";
 import axios from "axios";
-import quantumLogo from "./assets/quantum.jpeg"; // ✅ Keep your logo import
+import quantumLogo from "./assets/quantum.jpeg";
 
 export default function Login() {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -12,6 +13,8 @@ export default function Login() {
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate(); // ✅ initialize navigate
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +37,7 @@ export default function Login() {
           password: formData.password,
         });
         alert(response.data.message);
-        setIsRegistering(false); // Switch to login after registration
+        setIsRegistering(false); // Switch to login
       } catch (error) {
         alert(error.response?.data?.message || "Server error ❌");
       }
@@ -46,7 +49,9 @@ export default function Login() {
         });
         alert(response.data.message);
         console.log("Logged in user:", response.data.user);
-        // Optionally: save user info in localStorage or state
+
+        // ✅ Redirect to AlumniHome after login
+        navigate("/alumni");
       } catch (error) {
         alert(error.response?.data?.message || "Server error ❌");
       }
@@ -56,11 +61,7 @@ export default function Login() {
   return (
     <div className={`login-container design-bg${isRegistering ? " swap" : ""}`}>
       <div className="login-left">
-        <img
-          src={quantumLogo} // ✅ Use your imported logo
-          alt="QuantumCoders Logo"
-          className="login-logo"
-        />
+        <img src={quantumLogo} alt="QuantumCoders Logo" className="login-logo" />
         <h1>{isRegistering ? "REGISTER" : "LOGIN"}</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           {isRegistering && (
