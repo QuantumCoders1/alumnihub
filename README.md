@@ -12,7 +12,7 @@ git clone https://github.com/QuantumCoders1/alumnihub.git
 
 Open the Repository folder in your preferred IDLE and in terminal Redirect to the frontend folder
 ```
-cd alumnihub
+cd cohort-connects
 ```  
 
 Run npm install install required dependencies
